@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  asistente_facultad:
+    image: ${IMAGEN_ASISTENTE:-asistente-facultad:latest}
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    networks:
+      - traefik_public
+      - general_network
+    environment:
+      ENTORNO: produccion
+      CLAVE_SECRETA: ${CLAVE_SECRETA:?Defini CLAVE_SECRETA en las variables del stack}
+      ZONA_HORARIA: ${ZONA_HORARIA:-America/Argentina/Cordoba}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Defini ADMIN_EMAIL en las variables del stack}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Defini ADMIN_PASSWORD en las variables del stack}
+      URL_BASE_DATOS: postgresql+psycopg://postgres:${POSTGRES_PASSWORD:?Defini POSTGRES_PASSWORD en las variables del stack}@postgres:5432/asistente_facultad
+      MODO_BOT: webhook
+      TOKEN_BOT_TELEGRAM: ${TOKEN_BOT_TELEGRAM:-}
+      SECRETO_WEBHOOK_TELEGRAM: ${SECRETO_WEBHOOK_TELEGRAM:?Defini SECRETO_WEBHOOK_TELEGRAM en las variables del stack}
+      CAMPUS_CALENDARIO_URL: ${CAMPUS_CALENDARIO_URL:-}
+      SINCRONIZACION_CAMPUS_ACTIVA: ${SINCRONIZACION_CAMPUS_ACTIVA:-true}
+      MINUTOS_SINCRONIZACION_CAMPUS: ${MINUTOS_SINCRONIZACION_CAMPUS:-30}
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/api/salud', timeout=5)",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.asistente_facultad.rule=Host(${URL})
+        - traefik.http.routers.asistente_facultad.entrypoints=websecure
+        - traefik.http.routers.asistente_facultad.tls.certresolver=le
+        - traefik.http.routers.asistente_facultad.tls=true
+        - traefik.http.routers.asistente_facultad.service=asistente_facultad
+        - traefik.http.services.asistente_facultad.loadbalancer.server.port=5000
+        - traefik.http.services.asistente_facultad.loadbalancer.passHostHeader=true
+
+networks:
+  traefik_public:
+    external: true
+  general_network:
+    external: true

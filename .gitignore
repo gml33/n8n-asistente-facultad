@@ -1,0 +1,29 @@
+# Entornos locales y secretos
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Dependencias y entornos virtuales
+env/
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Sistema/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Archivos temporales y capturas locales
+*.log
+image.png
+image2.png
+imagen.png

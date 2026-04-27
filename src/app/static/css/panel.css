@@ -1,0 +1,199 @@
+/* Variables de diseño y paleta principal del panel. */
+:root {
+  --color-1: #2f6488;
+  --color-2: #44a3a8;
+  --color-3: #61c796;
+  --color-4: #7edb96;
+  --color-5: #aedeb3;
+  --color-primario: var(--color-2);
+  --color-primario-oscuro: #38878d;
+  --color-texto-principal: #21485f;
+  --color-fondo-panel: #e7ece8;
+}
+
+/* Base tipográfica y fondo general (menos brillante). */
+body {
+  font-family: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background-color: var(--color-fondo-panel) !important;
+}
+
+/* Cabecera y tarjetas de métricas superiores. */
+header h1 {
+  color: var(--color-1);
+}
+
+#resumen-cards .tarjeta-resumen {
+  color: #f8fff9;
+}
+
+#resumen-cards .col-6:nth-child(1) .tarjeta-resumen {
+  background: var(--color-1);
+}
+
+#resumen-cards .col-6:nth-child(2) .tarjeta-resumen {
+  background: var(--color-2);
+}
+
+#resumen-cards .col-6:nth-child(3) .tarjeta-resumen {
+  background: var(--color-3);
+}
+
+#resumen-cards .col-6:nth-child(4) .tarjeta-resumen {
+  background: var(--color-4);
+  color: #123729;
+}
+
+#resumen-cards .tarjeta-resumen .text-secondary {
+  color: #e7f8ef !important;
+}
+
+#resumen-cards .col-6:nth-child(4) .tarjeta-resumen .text-secondary {
+  color: #24543f !important;
+}
+
+#calendario-entregas {
+  min-height: 560px;
+}
+
+/* Tarjetas de entrega con codificación visual por prioridad. */
+.tarjeta-resumen .card-body {
+  padding: 1rem;
+}
+
+.tarjeta-entrega {
+  border-left: 4px solid #dee2e6;
+}
+
+.tarjeta-entrega.prioridad-alta {
+  border-left-color: #dc3545;
+}
+
+.tarjeta-entrega.prioridad-media {
+  border-left-color: var(--color-2);
+}
+
+.tarjeta-entrega.prioridad-baja {
+  border-left-color: var(--color-3);
+}
+
+/* Estados visuales de entregas. */
+.badge-estado.estado-pendiente {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+.badge-estado.estado-entregado {
+  background-color: #d8f2df;
+  color: #22583f;
+}
+
+/* Overrides de FullCalendar y botones Bootstrap a paleta del sistema. */
+.fc .fc-toolbar-title {
+  font-size: 1.1rem;
+}
+
+.fc .fc-button-primary {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.fc .fc-button-primary:hover,
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:active {
+  background-color: var(--color-primario-oscuro);
+  border-color: var(--color-primario-oscuro);
+}
+
+.btn-success {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+  background-color: var(--color-primario-oscuro);
+  border-color: var(--color-primario-oscuro);
+}
+
+.btn-outline-success {
+  color: var(--color-2);
+  border-color: var(--color-2);
+}
+
+.btn-outline-success:hover,
+.btn-outline-success.active {
+  background-color: var(--color-2);
+  border-color: var(--color-2);
+}
+
+/* Acabados visuales de contenedores/modales. */
+.card {
+  border-radius: 0.85rem;
+}
+
+.card-body {
+  color: var(--color-texto-principal);
+}
+
+#modal-entrega .modal-content {
+  border: 0;
+  border-radius: 0.9rem;
+}
+
+#modal-entrega .modal-body {
+  max-height: 72vh;
+  overflow-y: auto;
+}
+
+/* Imagen principal en pantalla de login. */
+.login-hero-wrap {
+  background: #132839;
+  border-top-left-radius: 0.85rem;
+  border-top-right-radius: 0.85rem;
+  overflow: hidden;
+}
+
+.login-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Adaptaciones responsive para tablets y móviles. */
+@media (max-width: 991.98px) {
+  #calendario-entregas {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  main {
+    padding-top: 1rem !important;
+  }
+
+  #calendario-entregas {
+    min-height: 420px;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .fc .fc-toolbar-title {
+    text-align: center;
+  }
+
+  .btn-group {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  #filtros-entregas-collapse .btn-group {
+    width: 100%;
+  }
+}

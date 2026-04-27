@@ -1,0 +1,9 @@
+# Roadmap
+
+Ideas pendientes para próximas iteraciones:
+
+- Agregar modo oscuro persistente por usuario.
+- Permitir aprobar o rechazar usuarios desde Telegram cuando alguien se registra.
+- Mejorar la importación de Campus con reglas configurables de mapeo por materia.
+- Agregar tests automatizados para endpoints críticos y sincronización ICS.
+- Incorporar métricas históricas de cumplimiento por materia y prioridad.

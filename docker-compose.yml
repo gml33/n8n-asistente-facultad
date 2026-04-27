@@ -1,0 +1,39 @@
+services:
+  base_datos:
+    image: postgres:16
+    container_name: asistente_facultad_base_datos
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${NOMBRE_BD:-asistente_facultad}
+      POSTGRES_USER: ${USUARIO_BD:-postgres}
+      POSTGRES_PASSWORD: ${CLAVE_BD:-postgres}
+      TZ: ${ZONA_HORARIA:-America/Argentina/Cordoba}
+    volumes:
+      - datos_postgres:/var/lib/postgresql/data
+    ports:
+      - "${PUERTO_BD_LOCAL:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${USUARIO_BD:-postgres} -d ${NOMBRE_BD:-asistente_facultad}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  aplicacion:
+    build: .
+    container_name: asistente_facultad_aplicacion
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      URL_BASE_DATOS: ${URL_BASE_DATOS:-postgresql+psycopg://postgres:postgres@base_datos:5432/asistente_facultad}
+      ZONA_HORARIA: ${ZONA_HORARIA:-America/Argentina/Cordoba}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src:/app
+    depends_on:
+      base_datos:
+        condition: service_healthy
+
+volumes:
+  datos_postgres:
