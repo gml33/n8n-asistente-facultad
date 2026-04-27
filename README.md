@@ -184,6 +184,7 @@ Supuestos:
 - PostgreSQL está disponible como `postgres:5432` dentro de `general_network`.
 - La base `asistente_facultad` ya existe.
 - El DNS público apunta al VPS.
+- El stack esta desarrollado en base a la configuracion especifica del vps que utilizo, cada uno vera como poner en produccion el desarrollo.
 
 Variables sugeridas para el stack:
 
@@ -212,3 +213,5 @@ curl -X POST "https://api.telegram.org/bot<TOKEN_BOT_TELEGRAM>/setWebhook" \
 ## Estado del proyecto
 
 El proyecto está preparado como MVP funcional: resuelve el problema de la necesidad de multiples recursos para organizar eventos, entregas y estar al dia con cuestiones academicas, muestra integración entre web, base de datos, jobs programados y bot conversacional, la intencion es evolucionar hacia analíticas académicas, integración con más calendarios o reglas de priorización inteligente.
+
+Si eventualmente deje alguna credencial avisame al correo bruzzone1804@gmail.com
