@@ -211,4 +211,4 @@ curl -X POST "https://api.telegram.org/bot<TOKEN_BOT_TELEGRAM>/setWebhook" \
 
 ## Estado del proyecto
 
-El proyecto está preparado como MVP funcional para portfolio: resuelve una necesidad concreta, muestra integración entre web, base de datos, jobs programados y bot conversacional, y puede evolucionar hacia analíticas académicas, integración con más calendarios o reglas de priorización inteligente.
+El proyecto está preparado como MVP funcional: resuelve el problema de la necesidad de multiples recursos para organizar eventos, entregas y estar al dia con cuestiones academicas, muestra integración entre web, base de datos, jobs programados y bot conversacional, la intencion es evolucionar hacia analíticas académicas, integración con más calendarios o reglas de priorización inteligente.
